@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前端优化降低请求量：合并资源，减少HTTP 请求数，minify &#x2F; gzip 压缩，webP，lazyLoad。 加快请求速度：预解析DNS，减少域名数，并行加载，CDN 分发。 缓存：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存localStorage。 渲染：JS&#x2F;CSS优化，加载顺序，服务端渲染，pipeline。">
+  <meta name="description" content="三次握手TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。  序列号seq：占4个字节，用来标记数据段的顺序，TCP把连接中发送的所有数据字节都编上一个序号，第一个字节的编号由本地随机产生；给字节编上序号后，就给每一个报文段指派一个序号；序列号seq就是这个报文段中的第一个字节的数据编号。 确">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端优化">
-<meta property="og:url" content="http://example.com/2020/11/16/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:title" content="三次握手和四次挥手">
+<meta property="og:url" content="http://example.com/2020/11/21/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/index.html">
 <meta property="og:site_name" content="Yull&#39;s Blog">
-<meta property="og:description" content="前端优化降低请求量：合并资源，减少HTTP 请求数，minify &#x2F; gzip 压缩，webP，lazyLoad。 加快请求速度：预解析DNS，减少域名数，并行加载，CDN 分发。 缓存：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存localStorage。 渲染：JS&#x2F;CSS优化，加载顺序，服务端渲染，pipeline。">
+<meta property="og:description" content="三次握手TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。  序列号seq：占4个字节，用来标记数据段的顺序，TCP把连接中发送的所有数据字节都编上一个序号，第一个字节的编号由本地随机产生；给字节编上序号后，就给每一个报文段指派一个序号；序列号seq就是这个报文段中的第一个字节的数据编号。 确">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-16T03:43:02.000Z">
-<meta property="article:modified_time" content="2020-11-21T02:29:49.677Z">
+<meta property="og:image" content="http://example.com/.com//github/github-blog/source_posts/三次握手和四次挥手/woshou.png">
+<meta property="og:image" content="http://example.com/.com//github/github-blog/source_posts/三次握手和四次挥手/huishou.png">
+<meta property="article:published_time" content="2020-11-21T13:42:30.000Z">
+<meta property="article:modified_time" content="2020-11-21T13:48:29.565Z">
 <meta property="article:author" content="Yu liuliu">
-<meta property="article:tag" content="前端优化">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/.com//github/github-blog/source_posts/三次握手和四次挥手/woshou.png">
 
-<link rel="canonical" href="http://example.com/2020/11/16/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2020/11/21/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>前端优化 | Yull's Blog</title>
+  <title>三次握手和四次挥手 | Yull's Blog</title>
   
 
 
@@ -167,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/21/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -180,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          前端优化
+          三次握手和四次挥手
         </h1>
 
         <div class="post-meta">
@@ -189,16 +191,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-11-16 11:43:02" itemprop="dateCreated datePublished" datetime="2020-11-16T11:43:02+08:00">2020-11-16</time>
+              <time title="创建时间：2020-11-21 21:42:30 / 修改时间：21:48:29" itemprop="dateCreated datePublished" datetime="2020-11-21T21:42:30+08:00">2020-11-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-21 10:29:49" itemprop="dateModified" datetime="2020-11-21T10:29:49+08:00">2020-11-21</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -220,22 +216,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><p>降低请求量：合并资源，减少HTTP 请求数，minify / gzip 压缩，webP，lazyLoad。</p>
-<p>加快请求速度：预解析DNS，减少域名数，并行加载，CDN 分发。</p>
-<p>缓存：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存localStorage。</p>
-<p>渲染：JS/CSS优化，加载顺序，服务端渲染，pipeline。</p>
-<a id="more"></a>
-
-<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><h4 id="参考回答："><a href="#参考回答：" class="headerlink" title="参考回答："></a>参考回答：</h4><p>减少HTTP请求</p>
-<p>使用内容发布网络（CDN）</p>
-<p>添加本地缓存</p>
-<p>压缩资源文件</p>
-<p>将CSS样式表放在顶部，把javascript放在底部（浏览器的运行机制决定）</p>
-<p>避免使用CSS表达式</p>
-<p>减少DNS查询</p>
-<p>使用外部javascript和CSS</p>
-<p>避免重定向</p>
-<p>图片lazyLoad</p>
+        <h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</p>
+<ul>
+<li>序列号seq：占4个字节，用来标记数据段的顺序，TCP把连接中发送的所有数据字节都编上一个序号，第一个字节的编号由本地<strong>随机产生</strong>；给字节编上序号后，就给每一个报文段指派一个序号；序列号seq就是这个报文段中的第一个字节的数据编号。</li>
+<li>确认号ack：占4个字节，期待收到对方下一个报文段的第一个数据字节的序号；序列号表示报文段携带数据的第一个字节的编号；而确认号指的是期望接收到下一个字节的编号；因此当前报文段最后一个字节的编号+1即为确认号。</li>
+<li>确认ACK：占1位，仅当ACK=1时，确认号字段才有效。ACK=0时，确认号无效</li>
+<li>同步SYN：连接建立时用于同步序号。当SYN=1，ACK=0时表示：这是一个连接请求报文段。若同意连接，则在响应报文段中使得SYN=1，ACK=1。因此，SYN=1表示这是一个连接请求，或连接接受报文。SYN这个标志位只有在TCP建产连接时才会被置1，握手完成后SYN标志位被置0。</li>
+<li>终止FIN：用来释放一个连接。FIN=1表示：此报文段的发送方的数据已经发送完毕，并要求释放运输连接</li>
+</ul>
+<p><strong>第一次握手</strong>：建立连接时，客户端发送syn包（syn=x）到服务器，并进入<strong>SYN_SENT</strong>状态，等待服务器确认；SYN：同步序列编号（Synchronize Sequence Numbers）。</p>
+<p><strong>第二次握手</strong>：服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（syn=y），即SYN+ACK包，此时服务器进入<strong>SYN_RECV</strong>状态；</p>
+<p><strong>第三次握手</strong>：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=y+1），此包发送完毕，客户端和服务器进入<strong>ESTABLISHED</strong>（TCP连接成功）状态，完成三次握手。</p>
+<p><img src="/.com//github\github-blog\source_posts\三次握手和四次挥手\woshou.png"></p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="/.com//github\github-blog\source_posts\三次握手和四次挥手\huishou.png"></p>
+<p><strong>第一次分手：</strong> 主机1（可以使客户端，也可以是服务器端），设置Sequence Number，向主机2发送一个FIN报文段；此时，主机1进入FIN_WAIT_1状态；这表示主机1没有数据要发送给主机2了；</p>
+<p><strong>第二次分手：</strong> 主机2收到了主机1发送的FIN报文段，向主机1回一个ACK报文段，Acknowledgment Number为Sequence Number加1；主机1进入FIN_WAIT_2状态；主机2告诉主机1，我“同意”你的关闭请求；</p>
+<p><strong>第三次分手：</strong> 主机2向主机1发送FIN报文段，请求关闭连接，同时主机2进入LAST_ACK状态；</p>
+<p><strong>第四次分手：</strong> 主机1收到主机2发送的FIN报文段，向主机2发送ACK报文段，然后主机1进入TIME_WAIT状态；主机2收到主机1的ACK报文段以后，就关闭连接；此时，主机1等待2MSL后依然没有收到回复，则证明Server端已正常关闭，那好，主机1也可以关闭连接了。</p>
+<h5 id="为什么要等待2MSL？"><a href="#为什么要等待2MSL？" class="headerlink" title="为什么要等待2MSL？"></a>为什么要等待2MSL？</h5><p>MSL：报文段最大生存时间，它是任何报文段被丢弃前在网络内的最长时间。<br>原因有二：</p>
+<ul>
+<li>保证TCP协议的全双工连接能够可靠关闭</li>
+<li>保证这次连接的重复数据段从网络中消失</li>
+</ul>
 
     </div>
 
@@ -253,9 +255,6 @@
             
         </div>
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" rel="tag"># 前端优化</a>
-          </div>
 
         
 
@@ -263,12 +262,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/10/http%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" rel="prev" title="http缓存策略">
-      <i class="fa fa-chevron-left"></i> http缓存策略
+    <a href="/2020/11/21/vue-router%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" rel="prev" title="vue-router实现原理">
+      <i class="fa fa-chevron-left"></i> vue-router实现原理
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/11/19/flex%E5%B8%83%E5%B1%80/" rel="next" title="flex布局">
-      flex布局 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/11/21/test/" rel="next" title="test">
+      test <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -328,7 +327,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">前端优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94%EF%BC%9A"><span class="nav-number">2.0.1.</span> <span class="nav-text">参考回答：</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">1.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">2.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%AD%89%E5%BE%852MSL%EF%BC%9F"><span class="nav-number">2.0.1.</span> <span class="nav-text">为什么要等待2MSL？</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
