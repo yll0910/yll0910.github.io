@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="微前端简单了解—-qiankunqiankun是一个基于single-spa 的微前端实现库，用于将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。   single-spa: spa 单页应用时代，我们的页面只有 index.html 这一个 html 文件，并且这个文件里面只有一个内容标签 ，用来充当其他内容的容器，而其他的内容都是通过 js 生成的。也就是说，我们只要拿到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="test">
+<meta property="og:url" content="http://example.com/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/index.html">
+<meta property="og:site_name" content="Yull&#39;s Blog">
+<meta property="og:description" content="微前端简单了解—-qiankunqiankun是一个基于single-spa 的微前端实现库，用于将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。   single-spa: spa 单页应用时代，我们的页面只有 index.html 这一个 html 文件，并且这个文件里面只有一个内容标签 ，用来充当其他内容的容器，而其他的内容都是通过 js 生成的。也就是说，我们只要拿到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yll0910/photoStore/blob/main/others/qiankun-image1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yll0910/photoStore/blob/main/others/qiankun-image2.png">
+<meta property="article:published_time" content="2021-01-06T12:34:04.000Z">
+<meta property="article:modified_time" content="2021-01-06T12:51:36.145Z">
+<meta property="article:author" content="Yu liuliu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yll0910/photoStore/blob/main/others/qiankun-image1.png">
+
+<link rel="canonical" href="http://example.com/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>test | Yull's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yull's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">怕什么真理无穷，进一寸有一寸的欢喜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Yu liuliu">
+      <meta itemprop="description" content="美人如花隔云端">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yull's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          test
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-06 20:34:04 / 修改时间：20:51:36" itemprop="dateCreated datePublished" datetime="2021-01-06T20:34:04+08:00">2021-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">微前端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="微前端简单了解—-qiankun"><a href="#微前端简单了解—-qiankun" class="headerlink" title="微前端简单了解—-qiankun"></a>微前端简单了解—-qiankun</h1><p>qiankun是一个基于single-spa 的微前端实现库，用于将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。</p>
+<p>  single-spa: spa 单页应用时代，我们的页面只有 index.html 这一个 html 文件，并且这个文件里面只有一个内容标签 <div id="app"></div>，用来充当其他内容的容器，而其他的内容都是通过 js 生成的。也就是说，我们只要拿到了子项目的容器 <div id="app"></div> 和生成内容的 js，插入到主项目，就可以呈现出子项目的内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/app.c8c4d97c.css</span> <span class="attr">rel</span>=<span class="string">stylesheet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">app</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/chunk-vendors.164d8230.js</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/app.6a6f1dda.js</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>我们只需要拿到子项目的上面四个标签，插入到主项目的 HTML 中，就可以在父项目中展现出子项目。</p>
+<h2 id="为什么会有微前端"><a href="#为什么会有微前端" class="headerlink" title="为什么会有微前端"></a>为什么会有微前端</h2><p>任何新技术的产生都是为了解决现有场景和需求下的技术痛点，微前端也不例外：</p>
+<ol>
+<li><strong>拆分和细化</strong>：当下前端领域，单页面应用（SPA）是非常流行的项目形态之一，而随着时间的推移以及应用功能的丰富，单页应用变得不再单一而是越来越庞大也越来越难以维护，往往是改一处而动全身，由此带来的发版成本也越来越高。微前端的意义就是将这些庞大应用进行拆分，并随之解耦，每个部分可以单独进行维护和部署，提升效率。</li>
+<li><strong>整合历史系统</strong>：在不少的业务中，或多或少会存在一些历史项目，这些项目大多以采用老框架类似（Backbone.js，Angular.js 1）的B端管理系统为主，介于日常运营，这些系统需要结合到新框架中来使用还不能抛弃，对此我们也没有理由浪费时间和精力重写旧的逻辑。而微前端可以将这些系统进行整合，在基本不修改来逻辑的同时来同时兼容新老两套系统并行运行。</li>
+</ol>
+<p>微前端主要是采用<strong>组合式应用路由</strong>方案，该方案的核心是“主从”思想，一个基座，若干个微应用。基座主要负责注册，路由映射消息下发等，微应用则是独立的前端项目，不限技术栈开发，由基座统一管理。</p>
+<a id="more"></a>
+
+<h2 id="微前端的的核心价值："><a href="#微前端的的核心价值：" class="headerlink" title="微前端的的核心价值："></a>微前端的的核心价值：</h2><ul>
+<li><p>技术栈无关</p>
+<p>主框架不限制接入的应用的技术栈，微应用具备完全自主权</p>
+</li>
+<li><p>独立开发、独立部署</p>
+<p>微应用仓库独立，前后端独立开发，部署完成后主框架自动完成同步更新</p>
+</li>
+<li><p>增量升级</p>
+<p>实施渐进式重构的手段和策略</p>
+</li>
+<li><p>独立运行</p>
+<p>每个微应用之间状态隔离，运行时状态不共享</p>
+</li>
+</ul>
+<h2 id="qiankun"><a href="#qiankun" class="headerlink" title="qiankun"></a>qiankun</h2><p>qiankun 是蚂蚁金服开源的一款框架，它是基于 single-spa 的。他在 single-spa 的基础上，实现了开箱即用，除一些必要的修改外，子项目只需要做很少的改动，就能很容易的接入。如果说 single-spa 是自行车的话，qiankun 就是个汽车。</p>
+<p>微前端中子项目的入口文件常见的有两种方式：JS entry 和 HTML entry</p>
+<p>纯 single-spa 采用的是 JS entry，而 qiankun 既支持 JS entry，又支持 HTML entry。</p>
+<h3 id="JS-entry-的要求比较苛刻："><a href="#JS-entry-的要求比较苛刻：" class="headerlink" title="JS entry 的要求比较苛刻："></a>JS entry 的要求比较苛刻：</h3><p>（1）将 css 打包到 js 里面</p>
+<p>（2）去掉 chunk-vendors.js，</p>
+<p>（3）去掉文件名的 hash 值</p>
+<p>（4）将 single-spa 模式的入口文件( app.js )放置到 index.html 目录，其他文件不变，原因是要截取 app.js 的路径作为 publicPath</p>
+<h3 id="qiankun-的好处："><a href="#qiankun-的好处：" class="headerlink" title="qiankun 的好处："></a>qiankun 的好处：</h3><ol>
+<li>qiankun 自带 js/css 沙箱功能，singles-spa 可以解决 css 污染，但是需要子项目配合</li>
+<li>single-spa 方案只支持 JS entry 的特点，限制了它只能支持 vue 、 react 、 angular 等技术开发的项目，对一些 jQuery 老项目则无能为力。qiankun 则没有限制</li>
+<li>qiankun 支持子项目预请求功能。</li>
+</ol>
+<h3 id="js沙箱："><a href="#js沙箱：" class="headerlink" title="js沙箱："></a>js沙箱：</h3><p>js 沙箱的原理是子项目加载之前，对 window 对象做一个快照，子项目卸载时恢复这个快照。</p>
+<p>即在应用的 bootstrap 及 mount 两个生命周期开始之前分别给全局状态打下快照，然后当应用切出/卸载时，将状态回滚至 bootstrap 开始之前的阶段，确保应用对全局状态的污染全部清零。而当应用二次进入时则再恢复至 mount 前的状态的，从而确保应用在 remount 时拥有跟第一次 mount 时一致的全局上下文。</p>
+<p>当然沙箱里做的事情还远不止这些，其他的还包括一些对全局事件监听的劫持等，以确保应用在切出之后，对全局事件的监听能得到完整的卸载，同时也会在 remount 时重新监听这些全局事件，从而模拟出与应用独立运行时一致的沙箱环境。</p>
+<img src="https://raw.githubusercontent.com/yll0910/photoStore/blob/main/others/qiankun-image1.png" />
+
+<h3 id="css沙箱："><a href="#css沙箱：" class="headerlink" title="css沙箱："></a>css沙箱：</h3><p>qiankun 的 css 沙箱的原理是重写<br>HTMLHeadElement.prototype.appendChild 事件，记录子项目运行时新增的 style/link 标签，卸载子项目时移除这些标签。</p>
+<p>qiankun 的总流程总结</p>
+<img src="https://raw.githubusercontent.com/yll0910/photoStore/blob/main/others/qiankun-image2.png" />
+
+<p>尝试搭建按照以下文章尝试：</p>
+<ul>
+<li>umi+qiankun+antd</li>
+</ul>
+<p>[]: <a target="_blank" rel="noopener" href="https://juejin.cn/post/6869220236886245383#heading-11">https://juejin.cn/post/6869220236886245383#heading-11</a></p>
+<ul>
+<li>vue+qiankun+element-ui</li>
+</ul>
+<p>[]: <a target="_blank" rel="noopener" href="https://juejin.cn/post/6890773400152489991">https://juejin.cn/post/6890773400152489991</a></p>
+
+    </div>
+
+    
+    
+    
+      
+       <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+            
+        </div>
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/15/redux-persist%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" rel="prev" title="redux-persist持久化数据存储">
+      <i class="fa fa-chevron-left"></i> redux-persist持久化数据存储
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%AE%80%E5%8D%95%E4%BA%86%E8%A7%A3%E2%80%94-qiankun"><span class="nav-number">1.</span> <span class="nav-text">微前端简单了解—-qiankun</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E5%BE%AE%E5%89%8D%E7%AB%AF"><span class="nav-number">1.1.</span> <span class="nav-text">为什么会有微前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9A%84%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">微前端的的核心价值：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qiankun"><span class="nav-number">1.3.</span> <span class="nav-text">qiankun</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-entry-%E7%9A%84%E8%A6%81%E6%B1%82%E6%AF%94%E8%BE%83%E8%8B%9B%E5%88%BB%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">JS entry 的要求比较苛刻：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qiankun-%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">qiankun 的好处：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js%E6%B2%99%E7%AE%B1%EF%BC%9A"><span class="nav-number">1.3.3.</span> <span class="nav-text">js沙箱：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css%E6%B2%99%E7%AE%B1%EF%BC%9A"><span class="nav-number">1.3.4.</span> <span class="nav-text">css沙箱：</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu liuliu"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Yu liuliu</p>
+  <div class="site-description" itemprop="description">美人如花隔云端</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu liuliu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+</html>

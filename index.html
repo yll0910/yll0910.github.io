@@ -128,7 +128,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -163,7 +163,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/test/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -177,7 +177,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/test/" class="post-title-link" itemprop="url">test</a>
+            <a href="/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/" class="post-title-link" itemprop="url">test</a>
         </h2>
 
         <div class="post-meta">
@@ -188,7 +188,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-01-06 20:34:04 / 修改时间：20:38:05" itemprop="dateCreated datePublished" datetime="2021-01-06T20:34:04+08:00">2021-01-06</time>
+              <time title="创建时间：2021-01-06 20:34:04 / 修改时间：20:51:36" itemprop="dateCreated datePublished" datetime="2021-01-06T20:34:04+08:00">2021-01-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">微前端</span></a>
+                </span>
             </span>
 
           
@@ -202,8 +211,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>test test test</p>
+          <h1 id="微前端简单了解—-qiankun"><a href="#微前端简单了解—-qiankun" class="headerlink" title="微前端简单了解—-qiankun"></a>微前端简单了解—-qiankun</h1><p>qiankun是一个基于single-spa 的微前端实现库，用于将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。</p>
+<p>  single-spa: spa 单页应用时代，我们的页面只有 index.html 这一个 html 文件，并且这个文件里面只有一个内容标签 <div id="app"></div>，用来充当其他内容的容器，而其他的内容都是通过 js 生成的。也就是说，我们只要拿到了子项目的容器 <div id="app"></div> 和生成内容的 js，插入到主项目，就可以呈现出子项目的内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/app.c8c4d97c.css</span> <span class="attr">rel</span>=<span class="string">stylesheet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">app</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/chunk-vendors.164d8230.js</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/app.6a6f1dda.js</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
 
+<p>我们只需要拿到子项目的上面四个标签，插入到主项目的 HTML 中，就可以在父项目中展现出子项目。</p>
+<h2 id="为什么会有微前端"><a href="#为什么会有微前端" class="headerlink" title="为什么会有微前端"></a>为什么会有微前端</h2><p>任何新技术的产生都是为了解决现有场景和需求下的技术痛点，微前端也不例外：</p>
+<ol>
+<li><strong>拆分和细化</strong>：当下前端领域，单页面应用（SPA）是非常流行的项目形态之一，而随着时间的推移以及应用功能的丰富，单页应用变得不再单一而是越来越庞大也越来越难以维护，往往是改一处而动全身，由此带来的发版成本也越来越高。微前端的意义就是将这些庞大应用进行拆分，并随之解耦，每个部分可以单独进行维护和部署，提升效率。</li>
+<li><strong>整合历史系统</strong>：在不少的业务中，或多或少会存在一些历史项目，这些项目大多以采用老框架类似（Backbone.js，Angular.js 1）的B端管理系统为主，介于日常运营，这些系统需要结合到新框架中来使用还不能抛弃，对此我们也没有理由浪费时间和精力重写旧的逻辑。而微前端可以将这些系统进行整合，在基本不修改来逻辑的同时来同时兼容新老两套系统并行运行。</li>
+</ol>
+<p>微前端主要是采用<strong>组合式应用路由</strong>方案，该方案的核心是“主从”思想，一个基座，若干个微应用。基座主要负责注册，路由映射消息下发等，微应用则是独立的前端项目，不限技术栈开发，由基座统一管理。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -407,7 +433,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-24 19:47:54" itemprop="dateModified" datetime="2020-11-24T19:47:54+08:00">2020-11-24</time>
+                <time title="修改时间：2021-01-06 20:49:49" itemprop="dateModified" datetime="2021-01-06T20:49:49+08:00">2021-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -430,7 +456,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><img src="https://raw.githubusercontent.com/yll0910/PhotosStore/master/others/woshou.png">
+          <h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><img src="https://raw.githubusercontent.com/yll0910/photoStore/tree/main/others/woshou.png" />
 
 <p>TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</p>
 <ul>
@@ -1024,7 +1050,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
