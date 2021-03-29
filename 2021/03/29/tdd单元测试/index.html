@@ -20,30 +20,35 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="美人如花隔云端">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yull&#39;s Blog">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="前端自动化测试分类 单元测试：针对“函数”，测试功能点的正确性 相关工具：Jest, Enzyme, @testing-library 系列   集成（e2e）测试：针对“流程”，测试关联模块间的特定流程的正确性 相关工具：Puppeteer, Selenium, WebdriverIO, CucumberJS   像素测试：针对“样式”，测试页面渲染效果的正确性 相关工具：Storybook,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tdd单元测试">
+<meta property="og:url" content="http://example.com/2021/03/29/tdd%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="Yull&#39;s Blog">
-<meta property="og:description" content="美人如花隔云端">
+<meta property="og:description" content="前端自动化测试分类 单元测试：针对“函数”，测试功能点的正确性 相关工具：Jest, Enzyme, @testing-library 系列   集成（e2e）测试：针对“流程”，测试关联模块间的特定流程的正确性 相关工具：Puppeteer, Selenium, WebdriverIO, CucumberJS   像素测试：针对“样式”，测试页面渲染效果的正确性 相关工具：Storybook,">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yll0910.github.io/photoStore/others/image9.png">
+<meta property="article:published_time" content="2021-03-29T09:00:33.000Z">
+<meta property="article:modified_time" content="2021-03-29T09:07:47.851Z">
 <meta property="article:author" content="Yu liuliu">
+<meta property="article:tag" content="单元测试">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yll0910.github.io/photoStore/others/image9.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/03/29/tdd%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Yull's Blog</title>
+  <title>tdd单元测试 | Yull's Blog</title>
   
 
 
@@ -157,9 +162,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -175,10 +181,9 @@
       <meta itemprop="name" content="Yull's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/29/tdd%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">tdd单元测试</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          tdd单元测试
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -211,7 +216,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="前端自动化测试分类"><a href="#前端自动化测试分类" class="headerlink" title="前端自动化测试分类"></a>前端自动化测试分类</h1><ol>
+        <h1 id="前端自动化测试分类"><a href="#前端自动化测试分类" class="headerlink" title="前端自动化测试分类"></a>前端自动化测试分类</h1><ol>
 <li>单元测试：针对“函数”，测试功能点的正确性<ul>
 <li>相关工具：Jest, Enzyme, @testing-library 系列</li>
 </ul>
@@ -305,764 +310,43 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;引入依赖</span><br><span class="line">import &#123; test &#125; from &#39;.&#x2F;test&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;被测试函数</span><br><span class="line">function foo() &#123;</span><br><span class="line">  &#x2F;&#x2F;依赖并调用其他文件下的方法</span><br><span class="line">  if (test()) &#123;</span><br><span class="line">    return 1</span><br><span class="line">  &#125;</span><br><span class="line">  return -1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;对依赖进行mock</span><br><span class="line">jest.mock(&#39;.&#x2F;test&#39;, () &#x3D;&gt; (&#123;</span><br><span class="line">  test: jest.fn().mockReturnValueOnce(true)</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> * 由于当前文件下只有一个case（或者多个case有同样的要求）</span><br><span class="line"> * 因此采用jest.mock进行模拟，并提供factory参数全局模拟其行为</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">it(&#39;case 1&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(foo()).toBe(1)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/" class="post-title-link" itemprop="url">微前端-qiankun</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-06 20:34:04" itemprop="dateCreated datePublished" datetime="2021-01-06T20:34:04+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-07 10:38:53" itemprop="dateModified" datetime="2021-01-07T10:38:53+08:00">2021-01-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">微前端</span></a>
-                </span>
-            </span>
-
-          
-
+       <div>
+            
+            <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+            
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="微前端简单了解—-qiankun"><a href="#微前端简单了解—-qiankun" class="headerlink" title="微前端简单了解—-qiankun"></a>微前端简单了解—-qiankun</h1><p>qiankun是一个基于single-spa 的微前端实现库，用于将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。</p>
-<p>  single-spa: spa 单页应用时代，我们的页面只有 index.html 这一个 html 文件，并且这个文件里面只有一个内容标签 <div id="app"></div>，用来充当其他内容的容器，而其他的内容都是通过 js 生成的。也就是说，我们只要拿到了子项目的容器 <div id="app"></div> 和生成内容的 js，插入到主项目，就可以呈现出子项目的内容。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/app.c8c4d97c.css</span> <span class="attr">rel</span>=<span class="string">stylesheet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">app</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/chunk-vendors.164d8230.js</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/app.6a6f1dda.js</span>&gt;</span> <span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>我们只需要拿到子项目的上面四个标签，插入到主项目的 HTML 中，就可以在父项目中展现出子项目。</p>
-<h2 id="为什么会有微前端"><a href="#为什么会有微前端" class="headerlink" title="为什么会有微前端"></a>为什么会有微前端</h2><p>任何新技术的产生都是为了解决现有场景和需求下的技术痛点，微前端也不例外：</p>
-<ol>
-<li><strong>拆分和细化</strong>：当下前端领域，单页面应用（SPA）是非常流行的项目形态之一，而随着时间的推移以及应用功能的丰富，单页应用变得不再单一而是越来越庞大也越来越难以维护，往往是改一处而动全身，由此带来的发版成本也越来越高。微前端的意义就是将这些庞大应用进行拆分，并随之解耦，每个部分可以单独进行维护和部署，提升效率。</li>
-<li><strong>整合历史系统</strong>：在不少的业务中，或多或少会存在一些历史项目，这些项目大多以采用老框架类似（Backbone.js，Angular.js 1）的B端管理系统为主，介于日常运营，这些系统需要结合到新框架中来使用还不能抛弃，对此我们也没有理由浪费时间和精力重写旧的逻辑。而微前端可以将这些系统进行整合，在基本不修改来逻辑的同时来同时兼容新老两套系统并行运行。</li>
-</ol>
-<p>微前端主要是采用<strong>组合式应用路由</strong>方案，该方案的核心是“主从”思想，一个基座，若干个微应用。基座主要负责注册，路由映射消息下发等，微应用则是独立的前端项目，不限技术栈开发，由基座统一管理。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag"># 单元测试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/06/%E5%BE%AE%E5%89%8D%E7%AB%AF-qiankun/" rel="prev" title="微前端-qiankun">
+      <i class="fa fa-chevron-left"></i> 微前端-qiankun
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/15/redux-persist%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/15/redux-persist%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">redux-persist持久化数据存储</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-12-15 15:50:21 / 修改时间：16:01:23" itemprop="dateCreated datePublished" datetime="2020-12-15T15:50:21+08:00">2020-12-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="React通过redux-persist持久化数据存储"><a href="#React通过redux-persist持久化数据存储" class="headerlink" title="React通过redux-persist持久化数据存储"></a>React通过redux-persist持久化数据存储</h2><p>redux-persist会将redux的store中的数据缓存到浏览器的localStorage中。</p>
-<p> 实现方式主要是依靠两个方法：persistStore和persistReducer，使用persistReducer时需要指定persistConfig，这一项就是你需要缓存的数据处理项，它有着黑白名单的处理方式，还需要一个storage的协助：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/15/redux-persist%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/30/Promise%E7%9A%84%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/30/Promise%E7%9A%84%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">Promise的手写实现</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-30 16:20:29 / 修改时间：16:48:39" itemprop="dateCreated datePublished" datetime="2020-11-30T16:20:29+08:00">2020-11-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index"><span itemprop="name">js</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Promise的手写实现"><a href="#Promise的手写实现" class="headerlink" title="Promise的手写实现"></a>Promise的手写实现</h1><h3 id="什么是Promise"><a href="#什么是Promise" class="headerlink" title="什么是Promise"></a>什么是<code>Promise</code></h3><ul>
-<li>异步编程的一种解决方案;</li>
-<li><code>Promise</code>是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果;</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/30/Promise%E7%9A%84%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/21/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/21/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="post-title-link" itemprop="url">三次握手和四次挥手</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-21 21:42:30" itemprop="dateCreated datePublished" datetime="2020-11-21T21:42:30+08:00">2020-11-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-07 10:40:44" itemprop="dateModified" datetime="2021-01-07T10:40:44+08:00">2021-01-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">浏览器相关</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><img src="https://yll0910.github.io/photoStore/others/woshou.png" />
-
-<p>TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</p>
-<ul>
-<li>序列号seq：占4个字节，用来标记数据段的顺序，TCP把连接中发送的所有数据字节都编上一个序号，第一个字节的编号由本地<strong>随机产生</strong>；给字节编上序号后，就给每一个报文段指派一个序号；序列号seq就是这个报文段中的第一个字节的数据编号。</li>
-<li>确认号ack：占4个字节，期待收到对方下一个报文段的第一个数据字节的序号；序列号表示报文段携带数据的第一个字节的编号；而确认号指的是期望接收到下一个字节的编号；因此当前报文段最后一个字节的编号+1即为确认号。</li>
-<li>确认ACK：占1位，仅当ACK=1时，确认号字段才有效。ACK=0时，确认号无效</li>
-<li>同步SYN：连接建立时用于同步序号。当SYN=1，ACK=0时表示：这是一个连接请求报文段。若同意连接，则在响应报文段中使得SYN=1，ACK=1。因此，SYN=1表示这是一个连接请求，或连接接受报文。SYN这个标志位只有在TCP建产连接时才会被置1，握手完成后SYN标志位被置0。</li>
-<li>终止FIN：用来释放一个连接。FIN=1表示：此报文段的发送方的数据已经发送完毕，并要求释放运输连接</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/21/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/21/vue-router%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/21/vue-router%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">vue-router实现原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-21 10:33:55 / 修改时间：11:32:45" itemprop="dateCreated datePublished" datetime="2020-11-21T10:33:55+08:00">2020-11-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="vue-router的实现原理"><a href="#vue-router的实现原理" class="headerlink" title="vue-router的实现原理"></a>vue-router的实现原理</h1><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>更新视图，但是不重新请求页面，通过改变url</p>
-<p>vue-router是基于路由和组件的<br>路由用于设定访问路径, 将路径和组件映射起来<br>在vue-router的单页面应用中, 页面的路径的改变就是组件的切换.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/21/vue-router%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/21/vue%E8%B7%AF%E7%94%B1%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/21/vue%E8%B7%AF%E7%94%B1%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">vue路由懒加载的三种方式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-21 09:48:07 / 修改时间：20:15:21" itemprop="dateCreated datePublished" datetime="2020-11-21T09:48:07+08:00">2020-11-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="vue路由懒加载的三种方式"><a href="#vue路由懒加载的三种方式" class="headerlink" title="vue路由懒加载的三种方式"></a>vue路由懒加载的三种方式</h1><p>为什么需要懒加载？</p>
-<p>　　像vue这种单页面应用，如果没有应用懒加载，运用webpack打包后的文件将会异常的大，造成进入首页时，需要加载的内容过多，时间过长，会出啊先长时间的白屏，即使做了loading也是不利于用户体验，而运用懒加载则可以将页面进行划分，需要的时候加载页面，可以有效的分担首页所承担的加载压力，减少首页加载用时。</p>
-<ol>
-<li><p>vue异步组件</p>
-</li>
-<li><p>es提案的import()</p>
-</li>
-<li><p>webpack的require.ensure()</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/21/vue%E8%B7%AF%E7%94%B1%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/19/flex%E5%B8%83%E5%B1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/19/flex%E5%B8%83%E5%B1%80/" class="post-title-link" itemprop="url">flex布局</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-19 17:51:24" itemprop="dateCreated datePublished" datetime="2020-11-19T17:51:24+08:00">2020-11-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-21 10:29:39" itemprop="dateModified" datetime="2020-11-21T10:29:39+08:00">2020-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="FLEX布局-弹性布局"><a href="#FLEX布局-弹性布局" class="headerlink" title="FLEX布局(弹性布局)"></a>FLEX布局(弹性布局)</h1><ul>
-<li>flixible Box</li>
-<li>flex容器：使用display： flex就是flex容器</li>
-<li>项目：flex容器中的子元素就是项目，不包括孙子元素</li>
-<li>默认主轴方向排列，即横向</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/19/flex%E5%B8%83%E5%B1%80/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/16/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">前端优化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-16 11:43:02" itemprop="dateCreated datePublished" datetime="2020-11-16T11:43:02+08:00">2020-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-21 10:29:49" itemprop="dateModified" datetime="2020-11-21T10:29:49+08:00">2020-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">浏览器相关</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><p>降低请求量：合并资源，减少HTTP 请求数，minify / gzip 压缩，webP，lazyLoad。</p>
-<p>加快请求速度：预解析DNS，减少域名数，并行加载，CDN 分发。</p>
-<p>缓存：HTTP 协议缓存请求，离线缓存 manifest，离线数据缓存localStorage。</p>
-<p>渲染：JS/CSS优化，加载顺序，服务端渲染，pipeline。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/16/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/10/http%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Yu liuliu">
-      <meta itemprop="description" content="美人如花隔云端">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yull's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/10/http%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">http缓存策略</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-10 15:31:11 / 修改时间：16:17:44" itemprop="dateCreated datePublished" datetime="2020-11-10T15:31:11+08:00">2020-11-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">浏览器相关</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Http协议的缓存策略"><a href="#Http协议的缓存策略" class="headerlink" title="Http协议的缓存策略"></a>Http协议的缓存策略</h2><p>缓存分为两种：强缓</p>
-<p>存和协商缓存</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/10/http%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -1114,6 +398,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">前端自动化测试分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88UT%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">前端单元测试（UT）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E4%B8%80%E4%B8%AAit%E5%87%BD%E6%95%B0%E4%BB%A3%E8%A1%A8"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">每个测试用例一个it函数代表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#describe"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">describe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mock%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.0.4.</span> <span class="nav-text">Mock函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.1.0.5.</span> <span class="nav-text">设置函数返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%A0%E5%8F%82"><span class="nav-number">2.1.0.5.1.</span> <span class="nav-text">传参</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">2.2.</span> <span class="nav-text">关于依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%88%86%E6%94%AF"><span class="nav-number">2.3.</span> <span class="nav-text">关于分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E7%9A%84-mock"><span class="nav-number">2.4.</span> <span class="nav-text">关于依赖的 mock</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
